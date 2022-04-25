@@ -163,7 +163,6 @@ function getPremium(event) {
                 inputMessage.innerHTML = premiumList.message;
                 divMessage.appendChild(inputMessage);
 
-                console.log(divMessage);
                 divToAppend.appendChild(divMessage);
             }
         },
