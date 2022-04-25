@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="#">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/Styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Premium Calculator</title>
+</head>
+<body>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/PremiumWebService.asmx" />
+        </Services>
+    </asp:ScriptManager>
+
+    <div class="header-container">
+        <div class="header-container-combo">
+            <div class="header-element">
+                <label class="header-label" for="newMonth">Month:</label>
+                <input class="header-box" type="text" id="newMonth" name="newMonth">
+            </div>
+            <div class="header-element">
+                <label class="header-label" for="newCarrier">Carrier:</label>
+                <input class="header-box" type="text" id="newCarrier" name="newCarrier">
+            </div>
+        </div>
+
+        <div class="header-container-combo">
+            <div class="header-element">
+                <label class="header-label" for="newState">State:</label>
+                <input class="header-box" type="text" id="newState" name="newState">
+            </div>
+            <div class="header-element">
+                <label class="header-label" for="newStateName">State Name:</label>
+                <input class="header-box" type="text" id="newStateName" name="newStateName">
+            </div>
+        </div>
+
+        <div class="header-container-combo">
+            <div class="header-element">
+                <label class="header-label" for="newMinAge">Min. Age:</label>
+                <input class="header-box" type="text" id="newMinAge" name="newMinAge">
+            </div>
+            <div class="header-element">
+                <label class="header-label" for="newMaxAge">Max. Age:</label>
+                <input class="header-box" type="text" id="newMaxAge" name="newMaxAge">
+            </div>
+        </div>
+        <div class="header-container-combo">
+            <div class="header-element">
+                <label class="header-label" for="newPremium">Premium:</label>
+                <input class="header-box" type="text" id="newPremium" name="newPremium">
+            </div>
+            <div class="header-element">
+                <label class="header-label" for="newPlan">Plan:</label>
+                <input class="header-box" type="text" id="newPlan" name="newPlan">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="body-container">
+        <fieldset>
+            <div class="body-container-wrapper">
+                <div class="body-column-left">
+                    <div class="body-element">
+                        <input id="addPremium" type="submit" value="Add Premium">
+                    </div>
+                </div>
+                <div class="body-column-right">
+                    <div id="getDataFromWS">
+                    </div>
+                </div>
+            </div>
+
+            <div class="body-container-wrapper block">
+                <div class="body-column-titles">
+                    <div class="body-element col-8">
+                        <label class="body-label">Carrier</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Plan</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">State</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Month</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Min. Age</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Max. Age</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Premium</label>
+                    </div>
+                    <div class="body-element col-8">
+                        <label class="body-label">Delete</label>
+                    </div>
+                </div>
+                <div id="getRulesFromWS">
+                    <ul class="body-list">
+                        <li class="body-list-unit">
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="Text" class="body-box" readonly value="Carrier" />
+                            </div>
+                            <div class="body-element center col-8">
+                                <input type="hidden" class="hidden" value="1" />
+                                <input type="button" class="deletebutton" value="Delete" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <script src="scripts/lists.js"></script>
+</body>
+</html>

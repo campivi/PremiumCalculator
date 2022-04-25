@@ -2,12 +2,34 @@
 const getPremiumButton = document.querySelector(("[id='getPremium']"));
 const dateofbirthDatepicker = document.querySelector(("[id='dateofbirth']"));
 const divToAppend = document.getElementById("getDataFromWS");
+const selectState = document.getElementById("states");
 
 //LISTENERS
 getPremiumButton.addEventListener('click', getPremium);
 dateofbirthDatepicker.addEventListener('change', calculateAge);
+window.onload = AddOptionState();
 
 //FUNCTIONS
+function AddOptionState() {
+    //CLEAR OPTIONS
+    $.ajax({
+        type: 'POST',
+        url: 'PremiumWebService.asmx/GetStates',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            var stateList = JSON.parse(response.d);
+            var fullOptions = "<option hidden value = \"\" > --Select option--</option>";
+            $.each(stateList, function (index, state) {
+                var option = "<option value=\"" + state.state + "\">" + state.stateName + "</option>";
+                fullOptions = fullOptions.concat(' ',option);
+            });
+            console.log(fullOptions);
+            selectState.innerHTML = selectState.innerHTML + fullOptions;
+        }
+    });
+}
+
 function calculateAge() {
     var dateofbirth = document.getElementById('dateofbirth');
     var dob = new Date(dateofbirth.value);
@@ -165,9 +187,6 @@ function getPremium(event) {
 
                 divToAppend.appendChild(divMessage);
             }
-        },
-        error: function (res, status) {
-            //THINK ABOUT WHAT TO DO WHEN FAILED
         }
     });
 }

@@ -125,7 +125,9 @@
   <ItemGroup>
     <Content Include="css\styles.css" />
     <Content Include="PremiumCalculator.html" />
+    <Content Include="PremiumList.html" />
     <Content Include="PremiumWebService.asmx" />
+    <Content Include="scripts\lists.js" />
     <Content Include="scripts\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>

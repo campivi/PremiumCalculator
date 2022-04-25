@@ -29,6 +29,18 @@ input[type=submit] {
         background-color: rgb(140 143 145 / 50%);
     }
 
+input[type=button] {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(140 143 145 / 24%);
+}
+
+    input[type=button]:hover {
+        background-color: rgb(140 143 145 / 50%);
+    }
+
 input[readonly] {
     pointer-events: none;
 }
@@ -108,6 +120,11 @@ input[readonly] {
     padding: 6px 0;
     display: inline-block;
 }
+.body-column-titles {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+}
 
 .body-column-right-titles {
     display: inline-flex;
@@ -121,8 +138,20 @@ input[readonly] {
     width: 100%;
 }
 
+.body-list{
+    width: 100%;
+}
+.body-list-unit{
+    display: inline-flex;
+    width: 100%;
+}
+
 .col-4 {
     width: 25%;
+    text-align: center;
+}
+.col-8 {
+    width: 13%;
     text-align: center;
 }
 
@@ -131,6 +160,10 @@ input[readonly] {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+}
+
+.block{
+    display: inline-block !important;
 }
 
 .bigger {
