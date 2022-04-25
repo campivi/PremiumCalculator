@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="#">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/Styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Premium Calculator</title>
+</head>
+<body>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/PremiumWebService.asmx" />
+        </Services>
+    </asp:ScriptManager>
+
+    <div class="header-container">
+        <div class="header-element">
+            <label class="header-label" for="dateofbirth">Date of Birth:</label>
+            <input class="header-box" type="date" id="dateofbirth" name="dateofbirth">
+        </div>
+
+        <div class="header-container-combo">
+            <div class="header-element">
+                <label class="header-label" for="states">State:</label>
+                <select class="header-box" name="states" id="states">
+                    <option hidden value="">--Select option--</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AL">Alabama</option>
+                    <option value="NY">New York</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="OO">Other</option>
+                </select>
+            </div>
+            <div class="header-element">
+                <label class="header-label" for="plans">Plan:</label>
+                <select class="header-box" name="plans" id="plans">
+                    <option hidden value="">--Select option--</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="header-element">
+            <label class="header-label" for="age">Age:</label>
+            <input class="header-box" type="text" id="age" name="age" readonly>
+        </div>
+    </div>
+
+    <div class="body-container">
+        <fieldset>
+            <div class="body-container-wrapper">
+                <div class="body-column-left">
+                    <div class="body-element">
+                        <input id="getPremium" type="submit" value="Get Premium">
+                    </div>
+
+                    <div class="body-element">
+                        <label class="body-label" for="periods">Period:</label>
+                        <select class="body-box" name="periods" id="periods">
+                            <option hidden value="">--Select option--</option>
+                            <option value="1">Monthly</option>
+                            <option value="3">Quarterly</option>
+                            <option value="6">Semi-Annual</option>
+                            <option value="12">Annual</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="body-column-right">
+                    <div class="body-column-right-titles">
+                        <div class="body-element col-4">
+                            <label class="body-label">Carrier</label>
+                        </div>
+                        <div class="body-element col-4">
+                            <label class="body-label">Premium</label>
+                        </div>
+                        <div class="body-element col-4">
+                            <label class="body-label">Annual</label>
+                        </div>
+                        <div class="body-element col-4">
+                            <label class="body-label">Monthly</label>
+                        </div>
+                    </div>
+                    <div id="getDataFromWS">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <script src="scripts/scripts.js"></script>
+</body>
+</html>
