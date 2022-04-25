@@ -72,7 +72,6 @@ namespace PremiumProject
                 if (premiumPlans.Count > 0)
                 {
                     JavaScriptSerializer js = new JavaScriptSerializer();
-                    //Context.Response.Write(js.Serialize(premiumPlans));
                     return js.Serialize(premiumPlans.OrderBy(it => it.carrier));
                 }
                 else
@@ -84,7 +83,6 @@ namespace PremiumProject
                 errorMsg.status = "failed";
                 errorMsg.message = ex.Message;
                 JavaScriptSerializer js = new JavaScriptSerializer();
-                //Context.Response.Write(js.Serialize(errorMsg));
                 return js.Serialize(errorMsg);
 
             }
