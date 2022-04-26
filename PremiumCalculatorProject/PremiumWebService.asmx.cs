@@ -101,7 +101,7 @@ namespace PremiumProject
                                     .ToList();
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            return js.Serialize(states);
+            return js.Serialize(states.OrderBy(it => it.stateName));
         }
 
         /* THIS METHOD POPULATES THE PLANS COMBO BOX */
