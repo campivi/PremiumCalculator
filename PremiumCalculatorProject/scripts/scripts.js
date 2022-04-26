@@ -2,12 +2,16 @@
 const getPremiumButton = document.querySelector(("[id='getPremium']"));
 const dateofbirthDatepicker = document.querySelector(("[id='dateofbirth']"));
 const divToAppend = document.getElementById("getDataFromWS");
+const divToAppendMessage = document.getElementById("messageBox");
 const selectState = document.getElementById("states");
+const selectPlan = document.getElementById("plans");
 
 //LISTENERS
 getPremiumButton.addEventListener('click', getPremium);
 dateofbirthDatepicker.addEventListener('change', calculateAge);
 window.onload = AddOptionState();
+window.onload = AddOptionPlan();
+window.onload = GetRulesCount();
 
 //FUNCTIONS
 function AddOptionState() {
@@ -24,10 +28,58 @@ function AddOptionState() {
                 var option = "<option value=\"" + state.state + "\">" + state.stateName + "</option>";
                 fullOptions = fullOptions.concat(' ',option);
             });
-            console.log(fullOptions);
             selectState.innerHTML = selectState.innerHTML + fullOptions;
         }
     });
+}
+
+function AddOptionPlan() {
+    //CLEAR OPTIONS
+    $.ajax({
+        type: 'POST',
+        url: 'PremiumWebService.asmx/GetPlans',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            var planList = JSON.parse(response.d);
+            var fullOptions = "<option hidden value = \"\" > --Select option--</option>";
+            $.each(planList, function (index, plan) {
+                var option = "<option value=\"" + plan.plan + "\">" + plan.plan + "</option>";
+                fullOptions = fullOptions.concat(' ', option);
+            });
+            selectPlan.innerHTML = selectPlan.innerHTML + fullOptions;
+        }
+    });
+}
+
+function GetRulesCount() {
+    //CLEAR OPTIONS
+    divToAppendMessage.innerHTML = "";
+
+    $.ajax({
+        type: 'POST',
+        url: 'PremiumWebService.asmx/GetPremiumRules',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            var premiumCount = JSON.parse(response.d);
+
+            const divButton = document.createElement("div");
+            divButton.className = "header-element";
+            const inputButton = document.createElement("input");
+            inputButton.className = "linkButton";
+            inputButton.type = "submit";
+            inputButton.onclick = redirectToList;
+            inputButton.value = "Rules: " + premiumCount.length + ".   Add more!";
+            divButton.appendChild(inputButton);
+
+            divToAppendMessage.appendChild(divButton);
+        }
+    });
+}
+
+function redirectToList() {
+    window.location.href = 'PremiumList.html';
 }
 
 function calculateAge() {

@@ -18,6 +18,9 @@
         </Services>
     </asp:ScriptManager>
 
+    <div class="message-box" id="messageBox">
+    </div>
+
     <div class="header-container">
         <div class="header-element">
             <label class="header-label" for="dateofbirth">Date of Birth:</label>
@@ -28,15 +31,13 @@
             <div class="header-element">
                 <label class="header-label" for="states">State:</label>
                 <select class="header-box" name="states" id="states">
+                    <option hidden value="">--Select option--</option>
                 </select>
             </div>
             <div class="header-element">
                 <label class="header-label" for="plans">Plan:</label>
                 <select class="header-box" name="plans" id="plans">
                     <option hidden value="">--Select option--</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
                 </select>
             </div>
         </div>

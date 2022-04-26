@@ -1,9 +1,14 @@
 ﻿//SELECTORS
 const getPremiumButton = document.querySelector("[id='addPremium']");
-const divToAppend = document.getElementById("getRulesFromWS");
+const getBackButton = document.querySelector("[id='backToCalculator']");
+const getLoadTestDataButton = document.querySelector("[id='LoadTestData']");
+const divToAppendRules = document.getElementById("getRulesFromWS");
+const divToAppend = document.getElementById("getDataFromWS");
 
 //LISTENERS
 getPremiumButton.addEventListener('click', addPremium);
+getBackButton.addEventListener('click', redirectToCalculator);
+getLoadTestDataButton.addEventListener('click', loadTestData);
 window.onload = getPremiumRules();
 
 function addPremium(event) {
@@ -13,6 +18,7 @@ function addPremium(event) {
     //CLEAR DIVS
     divToAppend.innerHTML = "";
 
+    var id = document.getElementById('hiddenId');
     var month = document.getElementById('newMonth');
     var carrier = document.getElementById('newCarrier');
     var state = document.getElementById('newState');
@@ -22,37 +28,62 @@ function addPremium(event) {
     var maxAge = document.getElementById('newMaxAge');
     var premium = document.getElementById('newPremium');
 
-    //CALL WEB SERVICE
-    var parameters = "{carrier:'" + carrier.value + "',plan:'" + plan.value + "',state:'" + state.value + "',stateName:'" + stateName.value + "',month:'" + month.value + "',minAge:'" + minAge.value + "',maxAge:'" + maxAge.value + "',premium:'" + premium.value + "'}";
+    if (id.value == '0') {
+        //CALL WEB SERVICE
+        var parameters = "{carrier:'" + carrier.value + "',plan:'" + plan.value + "',state:'" + state.value + "',stateName:'" + stateName.value + "',month:'" + month.value + "',minAge:'" + minAge.value + "',maxAge:'" + maxAge.value + "',premium:'" + premium.value + "'}";
 
-    $.ajax({
-        type: 'POST',
-        data: parameters,
-        url: 'PremiumWebService.asmx/AddPremiumList',
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (response) {
-            var premiumList = JSON.parse(response.d);
-            if (premiumList.status != undefined) {
-                //ERROR MESSAGE FROM WS
-                const divMessage = document.createElement("div");
-                divMessage.className = "body-element center";
-                const inputMessage = document.createElement("Label");
-                inputMessage.className = "body-label labelwarning";
-                inputMessage.innerHTML = premiumList.message;
-                divMessage.appendChild(inputMessage);
+        $.ajax({
+            type: 'POST',
+            data: parameters,
+            url: 'PremiumWebService.asmx/AddPremiumList',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                var premiumList = JSON.parse(response.d);
+                if (premiumList.status == "failed") {
+                    //ERROR MESSAGE FROM WS
+                    const divMessage = document.createElement("div");
+                    divMessage.className = "body-element center";
+                    const inputMessage = document.createElement("Label");
+                    inputMessage.className = "body-label labelwarning nomargin";
+                    inputMessage.innerHTML = premiumList.message;
+                    divMessage.appendChild(inputMessage);
 
-                divToAppend.appendChild(divMessage);
+                    divToAppend.appendChild(divMessage);
+                } else { location.reload(); }
             }
-        }
-    });
+        });
+    } else {
+        var parameters = "{id:'"+ id.value + "',carrier:'" + carrier.value + "',plan:'" + plan.value + "',state:'" + state.value + "',stateName:'" + stateName.value + "',month:'" + month.value + "',minAge:'" + minAge.value + "',maxAge:'" + maxAge.value + "',premium:'" + premium.value + "'}";
+
+        $.ajax({
+            type: 'POST',
+            data: parameters,
+            url: 'PremiumWebService.asmx/EditPremiumList',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                var premiumList = JSON.parse(response.d);
+                if (premiumList.status == "failed") {
+                    //ERROR MESSAGE FROM WS
+                    const divMessage = document.createElement("div");
+                    divMessage.className = "body-element center";
+                    const inputMessage = document.createElement("Label");
+                    inputMessage.className = "body-label labelwarning nomargin";
+                    inputMessage.innerHTML = premiumList.message;
+                    divMessage.appendChild(inputMessage);
+
+                    divToAppend.appendChild(divMessage);
+                } else { location.reload(); }
+            }
+        });
+    }
 }
 
 function deleteRule(e) {
     var item = e.target;
     var parent = item.parentElement
     var id = parent.getElementsByClassName("hidden")[0].value;
-    console.log(id);
 
     //CALL WEB SERVICE
     var parameters = "{id:'" + id + "'}";
@@ -69,10 +100,66 @@ function deleteRule(e) {
     });
 }
 
+function editRule(e) {
+    var item = e.target;
+    var parent = item.parentElement
+    var id = parent.getElementsByClassName("hidden")[0].value;
+
+    //CALL WEB SERVICE
+    var parameters = "{id:'" + id + "'}";
+
+    $.ajax({
+        type: 'POST',
+        data: parameters,
+        url: 'PremiumWebService.asmx/EditPremiumRule',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            var premiumList = JSON.parse(response.d);
+
+            var id = document.getElementById("hiddenId");
+            var month = document.getElementById('newMonth');
+            var carrier = document.getElementById('newCarrier');
+            var state = document.getElementById('newState');
+            var stateName = document.getElementById('newStateName');
+            var plan = document.getElementById('newPlan');
+            var minAge = document.getElementById('newMinAge');
+            var maxAge = document.getElementById('newMaxAge');
+            var cost = document.getElementById('newPremium');
+
+            id.value = premiumList.id;
+            month.value = premiumList.month;
+            carrier.value = premiumList.carrier;
+            state.value = premiumList.state;
+            stateName.value = premiumList.stateName;
+            plan.value = premiumList.plan;
+            minAge.value = premiumList.minAge;
+            maxAge.value = premiumList.maxAge;
+            cost.value = premiumList.premium;
+
+        }
+    });
+}
+
+function loadTestData() {
+    $.ajax({
+        type: 'POST',
+        url: 'PremiumWebService.asmx/LoadTestData',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            location.reload();
+        }
+    });
+}
+
+function redirectToCalculator() {
+    window.location.href = 'PremiumCalculator.html';
+}
 
 function getPremiumRules(event) {
     //CLEAR DIVS
-    divToAppend.innerHTML = "";
+    divToAppendRules.innerHTML = "";
 
     //CALL WEB SERVICE
     $.ajax({
@@ -172,11 +259,17 @@ function getPremiumRules(event) {
                 inputHidden.value = premium.id;
                 divButton.appendChild(inputHidden);
                 const inputButton = document.createElement("input");
-                inputButton.className = "deletebutton";
+                inputButton.className = "actionButton";
                 inputButton.type = "button";
                 inputButton.value = "Delete";
                 inputButton.onclick = deleteRule;
                 divButton.appendChild(inputButton);
+                const inputEditButton = document.createElement("input");
+                inputEditButton.className = "actionButton";
+                inputEditButton.type = "button";
+                inputEditButton.value = "Edit";
+                inputEditButton.onclick = editRule;
+                divButton.appendChild(inputEditButton);
 
                 //APPEND NEW DIV
                 liUnit.appendChild(divCarrier);
@@ -190,7 +283,7 @@ function getPremiumRules(event) {
 
                 ulElement.appendChild(liUnit);
 
-                divToAppend.appendChild(ulElement);
+                divToAppendRules.appendChild(ulElement);
             });
         }
     });

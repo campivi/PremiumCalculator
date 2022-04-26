@@ -18,8 +18,18 @@
         </Services>
     </asp:ScriptManager>
 
+    <div class="message-box" id="messageBox">
+        <div class="header-element">
+            <input id="backToCalculator" type="submit" value="Go back to the Calculator">
+        </div>
+        <div class="header-element">
+            <input id="LoadTestData" type="submit" value="Load test data">
+        </div>
+    </div>
+
     <div class="header-container">
         <div class="header-container-combo">
+            <input type="hidden" id="hiddenId" class="hidden" value="0" />
             <div class="header-element">
                 <label class="header-label" for="newMonth">Month:</label>
                 <input class="header-box" type="text" id="newMonth" name="newMonth">
@@ -64,12 +74,12 @@
     </div>
 
 
-    <div class="body-container">
+    <div class="body-container fixedWidth">
         <fieldset>
             <div class="body-container-wrapper">
                 <div class="body-column-left">
                     <div class="body-element">
-                        <input id="addPremium" type="submit" value="Add Premium">
+                        <input id="addPremium" type="submit" value="Save Premium">
                     </div>
                 </div>
                 <div class="body-column-right">
@@ -102,43 +112,15 @@
                         <label class="body-label">Premium</label>
                     </div>
                     <div class="body-element col-8">
-                        <label class="body-label">Delete</label>
+                        <label class="body-label">Action</label>
                     </div>
                 </div>
                 <div id="getRulesFromWS">
-                    <ul class="body-list">
-                        <li class="body-list-unit">
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="Text" class="body-box" readonly value="Carrier" />
-                            </div>
-                            <div class="body-element center col-8">
-                                <input type="hidden" class="hidden" value="1" />
-                                <input type="button" class="deletebutton" value="Delete" />
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </fieldset>
     </div>
+
     <script src="scripts/lists.js"></script>
 </body>
 </html>

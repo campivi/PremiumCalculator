@@ -1,5 +1,5 @@
 packages/
 PremiumCalculatorProject/bin/
 PremiumCalculatorProject/obj/
-.vs/PremiumCalculator/v16/.suo
-PremiumCalculatorProject/obj/Debug/PremiumCalculatorProject.csproj.AssemblyReference.cache
+.vs/
+PremiumCalculatorProject/obj/

@@ -1,4 +1,4 @@
-﻿/* GENERALL ELEMMENTS */
+﻿/* GENERALL ELEMENTS */
 * {
     margin: 0;
     padding: 0;
@@ -179,6 +179,25 @@ input[readonly] {
     color: red;
     font-size: 1.5rem;
     margin: 20px;
+}
+
+.nomargin{
+    margin: 0px !important;
+}
+
+.message-box {
+    margin: 0 65px;
+    float: right;
+    display: grid;
+}
+
+.actionButton {
+    width: 60px !important;
+    margin: 2px 4px !important;
+}
+
+.fixedWidth {
+    min-width: 1100px;
 }
 
 /* MEDIA QUERIES */
