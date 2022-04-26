@@ -2,4 +2,8 @@ packages/
 PremiumCalculatorProject/bin/
 PremiumCalculatorProject/obj/
 .vs/
-PremiumCalculatorProject/obj/
+.vs/PremiumCalculator/v16/.suo
+PremiumCalculatorProject/obj/Debug/
+PremiumCalculatorProject/obj/Debug/PremiumCalculatorProject.csproj.AssemblyReference.cache
+PremiumCalculatorProject/obj/Debug/PremiumCalculatorProject.dll
+PremiumCalculatorProject/obj/Debug/PremiumCalculatorProject.pdb
