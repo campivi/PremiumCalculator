@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background-image: linear-gradient(120deg, #f4f8f9, #e5e8ea);
+    background-color: rgb(237 237 237 / 57%);
 }
 
 fieldset {

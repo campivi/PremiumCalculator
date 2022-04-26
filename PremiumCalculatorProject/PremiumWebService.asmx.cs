@@ -114,7 +114,7 @@ namespace PremiumProject
                                     .ToList();
 
             JavaScriptSerializer js = new JavaScriptSerializer();
-            return js.Serialize(states);
+            return js.Serialize(states.OrderBy(it => it.plan));
         }
 
         /* THIS METHOD RETRIEVES THE SET OF RULES USED */
